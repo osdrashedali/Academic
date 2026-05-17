@@ -129,3 +129,6 @@ int main() {
 
     return 0;
 }
+/* nput: 3 + 4 * 2 
+(10 + 2) * 3 - 4 / 2
+Output: Result = 11.000000 Result = 32.000000 */
