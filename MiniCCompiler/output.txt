@@ -1,0 +1,492 @@
+############################################################
+#              MINI C COMPILER -- LAB PROJECT             #
+############################################################
+
+========================================================
+STAGE 1 : Comment Removal
+========================================================
+Cleaned source code (comments removed):
+--------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+#include <stdio.h>
+
+int main() {
+    int units;              
+    float rate = 6.5;       
+    float surcharge;        
+    float totalBill;        
+    char grade;              
+    char customerName[30];   
+
+    printf("Enter customer name: ");   
+    scanf("%s", customerName);
+
+    printf("Enter number of units consumed: ");
+    scanf("%d", &units);
+
+    
+
+
+    surcharge = (units * rate) / (10 - 2) + 25;
+
+    
+    totalBill = (units * rate) + surcharge - 5;
+
+    
+    if (units > 500) {
+        grade = 'A';         
+    } else if (units > 100) {
+        grade = 'B';         
+    } else {
+        grade = 'C';         
+    }
+
+    printf("------------------------------\n");
+    printf("Customer: %s\n", customerName);
+    printf("Units Consumed: %d\n", units);
+    printf("Surcharge: %f\n", surcharge);
+    printf("Total Bill: %f\n", totalBill);
+    printf("Billing Grade: %c\n", grade);
+    printf("------------------------------\n");
+
+    return 0; 
+}
+
+
+========================================================
+STAGE 2 : Lexical Analysis (Tokenization)
+========================================================
+No.   Lexeme                      Token Type        Line  
+--------------------------------------------------------
+1     #include <stdio.h>          DELIMITER         12    
+2     int                         KEYWORD           14    
+3     main                        IDENTIFIER        14    
+4     (                           DELIMITER         14    
+5     )                           DELIMITER         14    
+6     {                           DELIMITER         14    
+7     int                         KEYWORD           15    
+8     units                       IDENTIFIER        15    
+9     ;                           DELIMITER         15    
+10    float                       KEYWORD           16    
+11    rate                        IDENTIFIER        16    
+12    =                           OPERATOR          16    
+13    6.5                         FLOAT_CONST       16    
+14    ;                           DELIMITER         16    
+15    float                       KEYWORD           17    
+16    surcharge                   IDENTIFIER        17    
+17    ;                           DELIMITER         17    
+18    float                       KEYWORD           18    
+19    totalBill                   IDENTIFIER        18    
+20    ;                           DELIMITER         18    
+21    char                        KEYWORD           19    
+22    grade                       IDENTIFIER        19    
+23    ;                           DELIMITER         19    
+24    char                        KEYWORD           20    
+25    customerName                IDENTIFIER        20    
+26    [                           DELIMITER         20    
+27    30                          INT_CONST         20    
+28    ]                           DELIMITER         20    
+29    ;                           DELIMITER         20    
+30    printf                      IDENTIFIER        22    
+31    (                           DELIMITER         22    
+32    "Enter customer name: "     STRING_LITERAL    22    
+33    )                           DELIMITER         22    
+34    ;                           DELIMITER         22    
+35    scanf                       IDENTIFIER        23    
+36    (                           DELIMITER         23    
+37    "%s"                        STRING_LITERAL    23    
+38    ,                           DELIMITER         23    
+39    customerName                IDENTIFIER        23    
+40    )                           DELIMITER         23    
+41    ;                           DELIMITER         23    
+42    printf                      IDENTIFIER        25    
+43    (                           DELIMITER         25    
+44    "Enter number of units ...  STRING_LITERAL    25    
+45    )                           DELIMITER         25    
+46    ;                           DELIMITER         25    
+47    scanf                       IDENTIFIER        26    
+48    (                           DELIMITER         26    
+49    "%d"                        STRING_LITERAL    26    
+50    ,                           DELIMITER         26    
+51    &                           OPERATOR          26    
+52    units                       IDENTIFIER        26    
+53    )                           DELIMITER         26    
+54    ;                           DELIMITER         26    
+55    surcharge                   IDENTIFIER        31    
+56    =                           OPERATOR          31    
+57    (                           DELIMITER         31    
+58    units                       IDENTIFIER        31    
+59    *                           OPERATOR          31    
+60    rate                        IDENTIFIER        31    
+61    )                           DELIMITER         31    
+62    /                           OPERATOR          31    
+63    (                           DELIMITER         31    
+64    10                          INT_CONST         31    
+65    -                           OPERATOR          31    
+66    2                           INT_CONST         31    
+67    )                           DELIMITER         31    
+68    +                           OPERATOR          31    
+69    25                          INT_CONST         31    
+70    ;                           DELIMITER         31    
+71    totalBill                   IDENTIFIER        34    
+72    =                           OPERATOR          34    
+73    (                           DELIMITER         34    
+74    units                       IDENTIFIER        34    
+75    *                           OPERATOR          34    
+76    rate                        IDENTIFIER        34    
+77    )                           DELIMITER         34    
+78    +                           OPERATOR          34    
+79    surcharge                   IDENTIFIER        34    
+80    -                           OPERATOR          34    
+81    5                           INT_CONST         34    
+82    ;                           DELIMITER         34    
+83    if                          KEYWORD           37    
+84    (                           DELIMITER         37    
+85    units                       IDENTIFIER        37    
+86    >                           OPERATOR          37    
+87    500                         INT_CONST         37    
+88    )                           DELIMITER         37    
+89    {                           DELIMITER         37    
+90    grade                       IDENTIFIER        38    
+91    =                           OPERATOR          38    
+92    'A'                         CHAR_CONST        38    
+93    ;                           DELIMITER         38    
+94    }                           DELIMITER         39    
+95    else                        KEYWORD           39    
+96    if                          KEYWORD           39    
+97    (                           DELIMITER         39    
+98    units                       IDENTIFIER        39    
+99    >                           OPERATOR          39    
+100   100                         INT_CONST         39    
+101   )                           DELIMITER         39    
+102   {                           DELIMITER         39    
+103   grade                       IDENTIFIER        40    
+104   =                           OPERATOR          40    
+105   'B'                         CHAR_CONST        40    
+106   ;                           DELIMITER         40    
+107   }                           DELIMITER         41    
+108   else                        KEYWORD           41    
+109   {                           DELIMITER         41    
+110   grade                       IDENTIFIER        42    
+111   =                           OPERATOR          42    
+112   'C'                         CHAR_CONST        42    
+113   ;                           DELIMITER         42    
+114   }                           DELIMITER         43    
+115   printf                      IDENTIFIER        45    
+116   (                           DELIMITER         45    
+117   "----------------------...  STRING_LITERAL    45    
+118   )                           DELIMITER         45    
+119   ;                           DELIMITER         45    
+120   printf                      IDENTIFIER        46    
+121   (                           DELIMITER         46    
+122   "Customer: %s\n"            STRING_LITERAL    46    
+123   ,                           DELIMITER         46    
+124   customerName                IDENTIFIER        46    
+125   )                           DELIMITER         46    
+126   ;                           DELIMITER         46    
+127   printf                      IDENTIFIER        47    
+128   (                           DELIMITER         47    
+129   "Units Consumed: %d\n"      STRING_LITERAL    47    
+130   ,                           DELIMITER         47    
+131   units                       IDENTIFIER        47    
+132   )                           DELIMITER         47    
+133   ;                           DELIMITER         47    
+134   printf                      IDENTIFIER        48    
+135   (                           DELIMITER         48    
+136   "Surcharge: %f\n"           STRING_LITERAL    48    
+137   ,                           DELIMITER         48    
+138   surcharge                   IDENTIFIER        48    
+139   )                           DELIMITER         48    
+140   ;                           DELIMITER         48    
+141   printf                      IDENTIFIER        49    
+142   (                           DELIMITER         49    
+143   "Total Bill: %f\n"          STRING_LITERAL    49    
+144   ,                           DELIMITER         49    
+145   totalBill                   IDENTIFIER        49    
+146   )                           DELIMITER         49    
+147   ;                           DELIMITER         49    
+148   printf                      IDENTIFIER        50    
+149   (                           DELIMITER         50    
+150   "Billing Grade: %c\n"       STRING_LITERAL    50    
+151   ,                           DELIMITER         50    
+152   grade                       IDENTIFIER        50    
+153   )                           DELIMITER         50    
+154   ;                           DELIMITER         50    
+155   printf                      IDENTIFIER        51    
+156   (                           DELIMITER         51    
+157   "----------------------...  STRING_LITERAL    51    
+158   )                           DELIMITER         51    
+159   ;                           DELIMITER         51    
+160   return                      KEYWORD           53    
+161   0                           INT_CONST         53    
+162   ;                           DELIMITER         53    
+163   }                           DELIMITER         54    
+
+Total tokens recognized: 163
+
+========================================================
+STAGE 3 : Grammar Processing
+========================================================
+Original Grammar (as read from grammar.txt) (Start Symbol = STMT)
+--------------------------------------------------------
+  STMT -> ID = EXPR
+  EXPR -> EXPR + TERM
+  EXPR -> EXPR - TERM
+  EXPR -> TERM
+  TERM -> TERM * FACTOR
+  TERM -> TERM / FACTOR
+  TERM -> FACTOR
+  FACTOR -> ( EXPR )
+  FACTOR -> ID
+  FACTOR -> NUM
+
+Non-terminals: STMT EXPR TERM FACTOR 
+Terminals    : ID = + - * / ( ) NUM 
+
+========================================================
+STAGE 4 : Left Recursion Removal
+========================================================
+Transformed Grammar (left recursion eliminated) (Start Symbol = STMT)
+--------------------------------------------------------
+  STMT -> ID = EXPR
+  EXPR -> TERM EXPR'
+  EXPR' -> + TERM EXPR'
+  EXPR' -> - TERM EXPR'
+  EXPR' -> EPSILON
+  TERM -> FACTOR TERM'
+  TERM' -> * FACTOR TERM'
+  TERM' -> / FACTOR TERM'
+  TERM' -> EPSILON
+  FACTOR -> ( EXPR )
+  FACTOR -> ID
+  FACTOR -> NUM
+
+Non-terminals: STMT EXPR EXPR' TERM TERM' FACTOR 
+Terminals    : ID = + - * / ( ) NUM 
+
+========================================================
+STAGE 5 : FIRST Set Computation
+========================================================
+FIRST Sets
+--------------------------------------------------------
+FIRST(EXPR) = { (, ID, NUM }
+FIRST(EXPR') = { +, -, EPSILON }
+FIRST(FACTOR) = { (, ID, NUM }
+FIRST(STMT) = { ID }
+FIRST(TERM) = { (, ID, NUM }
+FIRST(TERM') = { *, /, EPSILON }
+
+
+========================================================
+STAGE 6 : FOLLOW Set Computation
+========================================================
+FOLLOW Sets
+--------------------------------------------------------
+FOLLOW(EXPR) = { $, ) }
+FOLLOW(EXPR') = { $, ) }
+FOLLOW(FACTOR) = { $, ), *, +, -, / }
+FOLLOW(STMT) = { $ }
+FOLLOW(TERM) = { $, ), +, - }
+FOLLOW(TERM') = { $, ), +, - }
+
+
+========================================================
+STAGE 7 : LL(1) Parsing Table Construction
+========================================================
+LL(1) Parsing Table
+--------------------------------------------------------
+NT        ID                      =                       +                       -                       *                       /                       (                       )                       NUM                     $                       
+STMT      STMT -> ID = EXPR       -                       -                       -                       -                       -                       -                       -                       -                       -                       
+EXPR      EXPR -> TERM EXPR'      -                       -                       -                       -                       -                       EXPR -> TERM EXPR'      -                       EXPR -> TERM EXPR'      -                       
+EXPR'     -                       -                       EXPR' -> + TERM EXPR'   EXPR' -> - TERM EXPR'   -                       -                       -                       EXPR' -> EPSILON        -                       EXPR' -> EPSILON        
+TERM      TERM -> FACTOR TERM'    -                       -                       -                       -                       -                       TERM -> FACTOR TERM'    -                       TERM -> FACTOR TERM'    -                       
+TERM'     -                       -                       TERM' -> EPSILON        TERM' -> EPSILON        TERM' -> * FACTOR TERM' TERM' -> / FACTOR TERM' -                       TERM' -> EPSILON        -                       TERM' -> EPSILON        
+FACTOR    FACTOR -> ID            -                       -                       -                       -                       -                       FACTOR -> ( EXPR )      -                       FACTOR -> NUM           -                       
+
+No FIRST/FIRST or FIRST/FOLLOW conflicts detected. Grammar is LL(1).
+
+========================================================
+STAGE 8 : Predictive Parsing
+========================================================
+Test Case 1 (valid assignment expression): a = ( b + c ) * d
+
+Stack                                     Input                       Action                            
+--------------------------------------------------------
+ID = EXPR $                               ID = ( ID + ID ) * ID $     Apply STMT -> ID = EXPR           
+= EXPR $                                  = ( ID + ID ) * ID $        Match 'ID'                        
+EXPR $                                    ( ID + ID ) * ID $          Match '='                         
+TERM EXPR' $                              ( ID + ID ) * ID $          Apply EXPR -> TERM EXPR'          
+FACTOR TERM' EXPR' $                      ( ID + ID ) * ID $          Apply TERM -> FACTOR TERM'        
+( EXPR ) TERM' EXPR' $                    ( ID + ID ) * ID $          Apply FACTOR -> ( EXPR )          
+EXPR ) TERM' EXPR' $                      ID + ID ) * ID $            Match '('                         
+TERM EXPR' ) TERM' EXPR' $                ID + ID ) * ID $            Apply EXPR -> TERM EXPR'          
+FACTOR TERM' EXPR' ) TERM' EXPR' $        ID + ID ) * ID $            Apply TERM -> FACTOR TERM'        
+ID TERM' EXPR' ) TERM' EXPR' $            ID + ID ) * ID $            Apply FACTOR -> ID                
+TERM' EXPR' ) TERM' EXPR' $               + ID ) * ID $               Match 'ID'                        
+EXPR' ) TERM' EXPR' $                     + ID ) * ID $               Apply TERM' -> EPSILON            
++ TERM EXPR' ) TERM' EXPR' $              + ID ) * ID $               Apply EXPR' -> + TERM EXPR'       
+TERM EXPR' ) TERM' EXPR' $                ID ) * ID $                 Match '+'                         
+FACTOR TERM' EXPR' ) TERM' EXPR' $        ID ) * ID $                 Apply TERM -> FACTOR TERM'        
+ID TERM' EXPR' ) TERM' EXPR' $            ID ) * ID $                 Apply FACTOR -> ID                
+TERM' EXPR' ) TERM' EXPR' $               ) * ID $                    Match 'ID'                        
+EXPR' ) TERM' EXPR' $                     ) * ID $                    Apply TERM' -> EPSILON            
+) TERM' EXPR' $                           ) * ID $                    Apply EXPR' -> EPSILON            
+TERM' EXPR' $                             * ID $                      Match ')'                         
+* FACTOR TERM' EXPR' $                    * ID $                      Apply TERM' -> * FACTOR TERM'     
+FACTOR TERM' EXPR' $                      ID $                        Match '*'                         
+ID TERM' EXPR' $                          ID $                        Apply FACTOR -> ID                
+TERM' EXPR' $                             $                           Match 'ID'                        
+EXPR' $                                   $                           Apply TERM' -> EPSILON            
+$                                         $                           Apply EXPR' -> EPSILON            
+$                                         $                           Accept                            
+
+Result: Accepted
+
+Test Case 2 (invalid expression, missing operand): a = ( b + )
+
+Stack                                     Input                       Action                            
+--------------------------------------------------------
+ID = EXPR $                               ID = ( ID + ) $             Apply STMT -> ID = EXPR           
+= EXPR $                                  = ( ID + ) $                Match 'ID'                        
+EXPR $                                    ( ID + ) $                  Match '='                         
+TERM EXPR' $                              ( ID + ) $                  Apply EXPR -> TERM EXPR'          
+FACTOR TERM' EXPR' $                      ( ID + ) $                  Apply TERM -> FACTOR TERM'        
+( EXPR ) TERM' EXPR' $                    ( ID + ) $                  Apply FACTOR -> ( EXPR )          
+EXPR ) TERM' EXPR' $                      ID + ) $                    Match '('                         
+TERM EXPR' ) TERM' EXPR' $                ID + ) $                    Apply EXPR -> TERM EXPR'          
+FACTOR TERM' EXPR' ) TERM' EXPR' $        ID + ) $                    Apply TERM -> FACTOR TERM'        
+ID TERM' EXPR' ) TERM' EXPR' $            ID + ) $                    Apply FACTOR -> ID                
+TERM' EXPR' ) TERM' EXPR' $               + ) $                       Match 'ID'                        
+EXPR' ) TERM' EXPR' $                     + ) $                       Apply TERM' -> EPSILON            
++ TERM EXPR' ) TERM' EXPR' $              + ) $                       Apply EXPR' -> + TERM EXPR'       
+TERM EXPR' ) TERM' EXPR' $                ) $                         Match '+'                         
+TERM EXPR' ) TERM' EXPR' $                ) $                         ERROR: no rule for [TERM, )]      
+
+Result: Syntax Error
+
+========================================================
+STAGE 9 : Three Address Code (TAC) Generation
+========================================================
+Source expression: a=(b+c)*(d-e)/2
+
+Generated Three Address Code
+--------------------------------------------------------
+  t1 = b + c
+  t2 = d - e
+  t3 = t1 * t2
+  t4 = t3 / 2
+  a = t4
+
+
+========================================================
+STAGE 10 : Code Optimization
+========================================================
+(A) Optimizing the TAC generated in Stage 9
+
+Optimized TAC for: a=(b+c)*(d-e)/2
+--------------------------------------------------------
+  t1 = b + c
+  t2 = d - e
+  t3 = t1 * t2
+  t4 = t3 / 2
+  a = t4
+
+(B) Extended demonstration covering all four optimizations
+    (constant folding, copy propagation, common subexpression
+     elimination, and dead code elimination) on a hand-built
+     TAC sequence with clear opportunities for each:
+
+Original Demonstration TAC
+--------------------------------------------------------
+  t1 = 4 + 6
+  t2 = a
+  x = t2
+  t3 = b + c
+  t4 = b + c
+  y = t3 + t4
+  t5 = 100
+  z = x * y
+
+Step 1 -- After Constant Folding (4 + 6 -> 10)
+--------------------------------------------------------
+  t1 = 10
+  t2 = a
+  x = t2
+  t3 = b + c
+  t4 = b + c
+  y = t3 + t4
+  t5 = 100
+  z = x * y
+
+Step 2 -- After Copy Propagation (x = t2 -> x = a)
+--------------------------------------------------------
+  t1 = 10
+  t2 = a
+  x = a
+  t3 = b + c
+  t4 = b + c
+  y = t3 + t4
+  t5 = 100
+  z = a * y
+
+Step 3 -- After Common Subexpression Elimination (t4 reuses t3)
+--------------------------------------------------------
+  t1 = 10
+  t2 = a
+  x = a
+  t3 = b + c
+  t4 = t3
+  y = t3 + t4
+  t5 = 100
+  z = a * y
+
+Step 4 -- After Dead Code Elimination (t1, t2, t5 dropped)
+--------------------------------------------------------
+  x = a
+  t3 = b + c
+  t4 = t3
+  y = t3 + t4
+  z = a * y
+
+
+========================================================
+STAGE 11 : Assembly Code Generation
+========================================================
+(A) Assembly generated from the optimized TAC of Stage 9:
+
+Generated Assembly Code (a=(b+c)*(d-e)/2)
+--------------------------------------------------------
+  MOV R1, R2
+  ADD R1, R3
+  MOV R4, R5
+  SUB R4, R6
+  MOV R7, R1
+  MUL R7, R4
+  MOV R8, R7
+  DIV R8, #2
+  MOV R9, R8
+  MOV [a], R9
+
+(B) CMP / JMP demonstration for a conditional such as
+    the grading logic used in input.c ('if (units > 500)'):
+
+Generated Assembly Code (conditional branch)
+--------------------------------------------------------
+  MOV R1, units
+  MOV R2, 500
+  CMP R1, R2
+  JG L_HEAVY_USAGE
+
+############################################################
+#                 COMPILATION PIPELINE COMPLETE           #
+############################################################

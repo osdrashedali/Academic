@@ -1,0 +1,23 @@
+# ============================================================
+# grammar.txt
+# Context-Free Grammar for arithmetic assignment statements.
+# Supports: assignment, +, -, *, /, parentheses, identifiers,
+# numbers.
+#
+# NOTE: This grammar is DELIBERATELY left-recursive on EXPR and
+# TERM. Phase 4 (Left Recursion Removal) automatically detects
+# and eliminates this recursion before FIRST/FOLLOW/parsing-table
+# construction, which is exactly the scenario this lab exercise
+# is meant to demonstrate.
+# ============================================================
+
+STMT -> ID = EXPR
+EXPR -> EXPR + TERM
+EXPR -> EXPR - TERM
+EXPR -> TERM
+TERM -> TERM * FACTOR
+TERM -> TERM / FACTOR
+TERM -> FACTOR
+FACTOR -> ( EXPR )
+FACTOR -> ID
+FACTOR -> NUM
