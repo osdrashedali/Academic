@@ -1,0 +1,63 @@
+[10/27, 6:30 AM] Azaan: 1.python --version
+2.python -m pip install virtualenv
+3.python -m virtualenv venv
+4.venv\Scripts\activate
+5.pip install Django
+6.pip install djangorestframework //pip show djangorestframework(for check)
+7.django-admin startproject core
+8.cd core
+9. python manage.py startapp api
+10. python manage.py makemigrations
+11.python manage.py migrate
+12. python manage.py createsuperuser
+13. code .
+14.python manage.py runserver
+[10/27, 6:33 AM] Azaan: go settings.py
+add into installed apps =
+'rest_framework',
+    'api',
+[10/27, 6:44 AM] Azaan: from django.db import models
+
+# Create your models here.
+class Student(models.Model):
+    name = models.CharField(max_length=255)
+    roll = models.IntegerField()
+    section = models.CharField(max_length=20)
+[10/27, 6:44 AM] Azaan: from django.contrib import admin
+from .models import Student
+
+@admin.register(Student)
+class StudentAdmin(admin.ModelAdmin):
+    list_display = ['id', 'name', 'roll', 'section']
+[10/27, 6:57 AM] Azaan: python manage.py makemigrations api
+python manage.py migrate
+python manage.py runserver
+[10/27, 7:02 AM] Azaan: তোমার api folder-এর ভিতরে serializers.py নামে নতুন ফাইল তৈরি করো।
+
+Path: D:\test\core\api\serializers.py
+[10/27, 7:03 AM] Azaan: from rest_framework import serializers
+from .models import Student
+
+class StudentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Student
+        fields = '__all__'
+[10/27, 7:10 AM] Azaan: from django.contrib import admin
+from django.urls import path
+from api.views import student_list
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('students/', student_list),
+]
+[10/27, 7:10 AM] Azaan: from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from .models import Student
+from .serializers import StudentSerializer
+
+@api_view(['GET'])
+def student_list(request):
+    students = Student.objects.all()
+    serializer = StudentSerializer(students, many=True)
+    return Response(serializer.data)
+[10/27, 7:11 AM] Azaan: server: http://127.0.0.1:8000/students/
